@@ -1,0 +1,207 @@
+{
+  "info": {
+    "name": "DATS API Collection",
+    "_postman_id": "6b4e3f04-1f5d-4f4b-a26c-dats-api",
+    "description": "Postman collection for the Digital Attachment Tracking System Laravel starter project.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://127.0.0.1:8000"
+    },
+    {
+      "key": "token",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Register Student",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"API Student\",\n  \"reg_no\": \"HDB212-9999/2022\",\n  \"department\": \"BBIT\",\n  \"email\": \"api-student@example.com\",\n  \"password\": \"password123\",\n  \"password_confirmation\": \"password123\"\n}"
+        },
+        "url": "{{base_url}}/api/v1/register/student"
+      }
+    },
+    {
+      "name": "Register Lecturer",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"API Lecturer\",\n  \"department\": \"BBIT\",\n  \"email\": \"api-lecturer@example.com\",\n  \"password\": \"password123\",\n  \"password_confirmation\": \"password123\"\n}"
+        },
+        "url": "{{base_url}}/api/v1/register/lecturer"
+      }
+    },
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"lecturer@jkuat.ac.ke\",\n  \"password\": \"password123\"\n}"
+        },
+        "url": "{{base_url}}/api/v1/login"
+      }
+    },
+    {
+      "name": "Get Current User",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/me"
+      }
+    },
+    {
+      "name": "List Opportunities",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/opportunities"
+      }
+    },
+    {
+      "name": "Create Opportunity",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Backend Development Attachment\",\n  \"organization_name\": \"Cyberfear Labs\",\n  \"location\": \"Nairobi\",\n  \"description\": \"Work on Laravel features and API testing.\",\n  \"requirements\": \"PHP, Laravel basics, Git, Postman\",\n  \"application_deadline\": \"2026-04-30\"\n}"
+        },
+        "url": "{{base_url}}/api/v1/opportunities"
+      }
+    },
+    {
+      "name": "Apply to Opportunity",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"message\": \"I am interested in this attachment opportunity.\"\n}"
+        },
+        "url": "{{base_url}}/api/v1/opportunities/1/apply"
+      }
+    },
+    {
+      "name": "Create Logbook",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"opportunity_id\": 1,\n  \"week_number\": 1,\n  \"entry_date\": \"2026-03-17\",\n  \"tasks_completed\": \"Configured the Laravel project and created auth routes.\",\n  \"skills_gained\": \"Routing, migrations, validation, role middleware.\",\n  \"challenges\": \"Resolving model relationships.\",\n  \"next_week_plan\": \"Implement application and logbook review endpoints.\"\n}"
+        },
+        "url": "{{base_url}}/api/v1/logbooks"
+      }
+    },
+    {
+      "name": "List Logbooks",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/logbooks"
+      }
+    },
+    {
+      "name": "Review Logbook",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"lecturer_feedback\": \"Good progress. Improve error handling next week.\",\n  \"status\": \"reviewed\"\n}"
+        },
+        "url": "{{base_url}}/api/v1/logbooks/1/review"
+      }
+    },
+    {
+      "name": "Logout",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": "{{base_url}}/api/v1/logout"
+      }
+    }
+  ]
+}
